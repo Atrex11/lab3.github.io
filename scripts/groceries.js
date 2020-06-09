@@ -82,7 +82,7 @@ var products = [
 
 	},
 	{
-		name: "Banana",
+		name: "banana",
 		vegetarian: true,
 		glutenFree: true,
 		category: "fruit",
@@ -91,7 +91,7 @@ var products = [
 
 	},
 	{
-		name: "Milk",
+		name: "milk",
 		vegetarian: true,
 		glutenFree: true,
 		category: "dairyproduct",
