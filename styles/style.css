@@ -1,0 +1,75 @@
+/* This style sheet is taken from  https://www.w3schools.com/howto/howto_js_tabs.asp> */
+
+/* Style the tab */
+html{
+   
+    background: rgb(254, 193, 105) /* Green background with 30% opacity */
+    
+}  
+.tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+}
+
+/* Style the buttons that are used to open the tab content */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
+  background-color: rgb(128, 128, 128);
+
+}
+
+.container {
+    height: 200px;
+    position: relative;
+  }
+.column {
+  float: left;
+  padding: 10px;
+   /* Should be removed. Only for demonstration */
+  width: 50%;
+  margin:  0 1% 0 1%;
+  border-radius: 5px;
+}
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Style the footer */
+.footer {
+    margin-top: 30px;
+    bottom:1px;
+    width: 100%;
+    background-color: rgb(248, 163, 92);
+    padding: 10px;
+    left:0px;
+    right: 0px;
+    position: absolute;
+
+}
