@@ -1,52 +1,88 @@
+var currentTab = 0; // Current tab is set to be the first tab (0)
+showTab(currentTab); // Display the current tab
 
-
-var expanded = false;
-
-function showCheckboxes() {
-  var checkboxes = document.getElementById("checkboxes");
-  if (!expanded) {
-    checkboxes.style.display = "block";
-    expanded = true;
-  } else {
-    checkboxes.style.display = "none";
-    expanded = false;
-  }
-}
-
-// This function is called when any of the tab is clicked
-// It is adapted from https://www.w3schools.com/howto/howto_js_tabs.asp
-
-function openInfo(evt, tabName) {
-
-	// Get all elements with class="tabcontent" and hide them
-	tabcontent = document.getElementsByClassName("tabcontent");
-	for (i = 0; i < tabcontent.length; i++) {
-		tabcontent[i].style.display = "none";
-	}
-
-	// Get all elements with class="tablinks" and remove the class "active"
-	tablinks = document.getElementsByClassName("tablinks");
-	for (i = 0; i < tablinks.length; i++) {
-		tablinks[i].className = tablinks[i].className.replace(" active", "");
-	}
-
-	// Show the current tab, and add an "active" class to the button that opened the tab
-	document.getElementById(tabName).style.display = "block";
-	evt.currentTarget.className += " active";
-
-}
-
-
+function showTab(n) {
 	
+  // This function will display the specified tab of the form ...
+  var x = document.getElementsByClassName("tab");
+  x[n].style.display = "block";
+  // ... and fix the Previous/Next buttons:
+  if (n == 0) {
+    document.getElementById("prevBtn").style.display = "none";
+  } else {
+    document.getElementById("prevBtn").style.display = "inline";
+  }
+  if (n == (x.length - 1)) {
+    document.getElementById("nextBtn").innerHTML = "Submit";
+  } else {
+    document.getElementById("nextBtn").innerHTML = "Next";
+  }
+  
+  // ... and run a function that displays the correct step indicator:
+  fixStepIndicator(n)
+}
+
+function fixStepIndicator(n) {
+  // This function removes the "active" class of all steps...
+  var i, x = document.getElementsByClassName("step");
+  for (i = 0; i < x.length; i++) {
+    x[i].className = x[i].className.replace(" active", "");
+  }
+  //... and adds the "active" class to the current step:
+  x[n].className += " active";
+}
+
+function nextPrev(n) {
+	// This function will figure out which tab to display
+	var x = document.getElementsByClassName("tab");
+	// Exit the function if any field in the current tab is invalid:
+	if (n == 1 && !validateForm()) return false;
+	// Hide the current tab:
+	x[currentTab].style.display = "none";
+	// Increase or decrease the current tab by 1:
+	currentTab = currentTab + n;
+	// if you have reached the end of the form... :
+	if (currentTab >= x.length) {
+	  //...the form gets submitted:
+	  document.getElementById("regForm").submit();
+	  return false;
+	}
+	// Otherwise, display the correct tab:
+	showTab(currentTab);
+}
+
+function validateForm() {
+	// This function deals with validation of the form fields
+	var x, y, i, valid = true;
+	x = document.getElementsByClassName("tab");
+	y = x[currentTab].getElementsByTagName("input");
+	// A loop that checks every input field in the current tab:
+	for (i = 0; i < y.length; i++) {
+	  // If a field is empty...
+	  if (y[i].value == "") {
+		// add an "invalid" class to the field:
+		y[i].className += " invalid";
+		// and set the current valid status to false:
+		valid = false;
+	  }
+	}
+	// If the valid status is true, mark the step as finished and valid:
+	if (valid) {
+	  document.getElementsByClassName("step")[currentTab].className += " finish";
+	}
+	
+	return valid; // return the valid status
+  }
+
 // generate a checkbox list from a list of products
 // it makes each product name as the label for the checkbox
 
-function populateListProductChoices(slct1, slct2) {
+function populateListProductChoices(slct1) {
     var s1 = document.getElementById(slct1);
-    var s2 = document.getElementById(slct2);
+    
 	
 	// s2 represents the <div> in the Products tab, which shows the product list, so we first set it empty
-    s2.innerHTML = "";
+    
 		
 	// obtain a reduced list of products based on restrictions
     var optionArray = restrictListProducts(products, s1.value);
@@ -58,27 +94,36 @@ function populateListProductChoices(slct1, slct2) {
 	for (i = 0; i < optionArray.length; i++) {
 			
 		var productName = optionArray[i].name;
+		var productCategory = optionArray[i].category;
 		var productPrice = optionArray[i].price;
 		// create the checkbox and add in HTML DOM
 		var checkbox = document.createElement("input");
+		var panel = $("#"+productCategory);
+		
+		$("#"+productCategory).append($('<div class="cardColumn" id="'+productName+'"> </div>'));
+		$("#"+ productName).addClass("card");
+		var card = $("#"+ productName);
 		checkbox.type = "checkbox";
 		checkbox.name = "product";
 		checkbox.value = productName;
-		s2.appendChild(checkbox);
+		card.append('<img class="images" src="images/'+productName+'.jpg"/> ');
+		card.append(checkbox);
 		
 		// create a label for the checkbox, and also add in HTML DOM
 		var label = document.createElement('label')
 		label.htmlFor = productName;
 		label.appendChild(document.createTextNode(productName));
-		s2.appendChild(label);
+		card.append(label);
 		
 		var price = document.createElement('label')
 		price.htmlFor = productPrice;
 		price.appendChild(document.createTextNode(" | price: " + productPrice + "$" ));
-		s2.appendChild(price);
+		card.append(price);
 
 		// create a breakline node and add in HTML DOM
-		s2.appendChild(document.createElement("br"));    
+		card.append(document.createElement("br"));
+
+		panel.append(card);
 	}
 }
 	
@@ -111,5 +156,22 @@ function selectedItems(){
 	c.appendChild(document.createTextNode("Total Price is " + getTotalPrice(chosenProducts) + "$"));
 		
 }
+
+var acc = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.maxHeight) {
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    } 
+  });
+}
+
+
 
 

@@ -6,42 +6,33 @@ html{
     background: rgb(254, 193, 105) /* Green background with 30% opacity */
     
 }  
-.tab {
-  overflow: hidden;
-  border: 1px solid #ccc;
-  background-color: #f1f1f1;
+/* Style the input fields */
+input {
+  padding: 10px;
+  width: 100%;
+  font-size: 17px;
+  font-family: Raleway;
+  border: 1px solid #aaaaaa;
 }
 
-/* Style the buttons that are used to open the tab content */
-.tab button {
-  background-color: inherit;
-  float: left;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  padding: 14px 16px;
-  transition: 0.3s;
+/* Mark input boxes that gets an error on validation: */
+input.invalid {
+  background-color: #ffdddd;
 }
-
-/* Change background color of buttons on hover */
-.tab button:hover {
-  background-color: #ddd;
-}
-
-/* Create an active/current tablink class */
-.tab button.active {
-  background-color: #ccc;
-}
-
-/* Style the tab content */
-.tabcontent {
-  display: none;
+#regForm {
+  min-width: 300px;
+  right:0;
   padding: 6px 12px;
   border: 1px solid #ccc;
   border-top: none;
-  background-color: rgb(128, 128, 128);
-
+  background-color: #3eb4c4;
 }
+/* Hide all steps by default: */
+.tab {
+  display: none;
+  
+}
+
 
 .container {
     height: 200px;
@@ -61,6 +52,26 @@ html{
   clear: both;
 }
 
+/* Make circles that indicate the steps of the form: */
+.step {
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbbbbb;
+  border: none;
+  border-radius: 50%;
+  display: inline-block;
+  opacity: 0.5;
+}
+/* Mark the active step: */
+.step.active {
+  opacity: 1;
+}
+
+/* Mark the steps that are finished and valid: */
+.step.finish {
+  background-color: #4CAF50;
+}
 /* Style the footer */
 .footer {
     margin-top: 30px;
@@ -70,6 +81,98 @@ html{
     padding: 10px;
     left:0px;
     right: 0px;
-    position: absolute;
+    position: sticky;
+}
 
+
+.accordion {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+  transition: 0.4s;
+}
+
+.active, .accordion:hover {
+  background-color: #ccc;
+}
+
+.accordion:after {
+  content: '\002B';
+  color: #777;
+  font-weight: bold;
+  float: right;
+  margin-left: 5px;
+}
+
+.active:after {
+  content: "\2212";
+}
+
+.panel {
+  padding: 0 18px;
+  background-color: white;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
+
+
+
+/* Float four columns side by side */
+.cardColumn {
+  float: left;
+  width: 25%;
+  padding: 0 10px;
+}
+
+/* Remove extra left and right margins, due to padding */
+.cardRow {
+  margin: 0 -5px;
+  align-content: center;}
+
+/* Clear floats after the columns */
+.cardRow:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive columns */
+@media screen and (max-width: 600px) {
+  .cardColumn {
+    width: 100%;
+    display: block;
+    margin-bottom: 20px;
+  }
+}
+
+/* Style the counter cards */
+.card {
+  margin: 20px;
+  box-shadow: 0 4px 8px 0 rgba(54, 51, 51, 0.2);
+  padding: 16px;
+  text-align: center;
+  background-color: #f1f1f1;
+  border: 2px solid black;
+  width: 150px;
+  height: 200px;
+  cursor: pointer;
+}
+.card:hover {
+  background: #bebebe;
+}
+.card:active{
+  background: #919090;
+}
+
+
+.images{
+  width: 100px;
+  height: auto;
 }

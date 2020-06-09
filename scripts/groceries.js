@@ -8,12 +8,14 @@ var products = [
 		vegetarian: true,
 		glutenFree: true,
 		organicProduct:true,
+		category: "vegetables",
 		price: 1.99
 	},
 	{
 		name: "bread",
 		vegetarian: true,
 		glutenFree: false,
+		category: "carbs",
 		organicProduct:false,
 		price: 2.35
 	},
@@ -21,6 +23,7 @@ var products = [
 		name: "salmon",
 		vegetarian: false,
 		glutenFree: true,
+		category: "meat",
 		organicProduct:true,
 		price: 10.00
 	},
@@ -28,6 +31,7 @@ var products = [
 		name: "steak",
 		vegetarian: false,
 		glutenFree: true,
+		category: "meat",
 		organicProduct:true,
 		price: 15.00
 
@@ -36,6 +40,7 @@ var products = [
 		name: "fries",
 		vegetarian: true,
 		glutenFree: false,
+		category: "carbs",
 		organicProduct:false,
 		price: 4.00
 
@@ -44,6 +49,7 @@ var products = [
 		name: "burger",
 		vegetarian: false,
 		glutenFree: true,
+		category: "meat",
 		organicProduct:false,
 		price: 8.00
 
@@ -52,6 +58,7 @@ var products = [
 		name: "shrimp",
 		vegetarian: false,
 		glutenFree: true,
+		category: "meat",
 		organicProduct:false,
 		price: 7.00
 
@@ -60,22 +67,52 @@ var products = [
 		name: "apple",
 		vegetarian: true,
 		glutenFree: true,
+		category: "fruit",
 		organicProduct:true,
 		price: 2.00
+
+	},
+	{
+		name: "strawberries",
+		vegetarian: true,
+		glutenFree: true,
+		category: "fruit",
+		organicProduct:true,
+		price: 2.00
+
+	},
+	{
+		name: "Banana",
+		vegetarian: true,
+		glutenFree: true,
+		category: "fruit",
+		organicProduct:true,
+		price: 2.00
+
+	},
+	{
+		name: "Milk",
+		vegetarian: true,
+		glutenFree: true,
+		category: "dairyproduct",
+		organicProduct:true,
+		price: 7.00
 
 	},
 	{
 		name: "ice cream",
 		vegetarian: true,
 		glutenFree: false,
+		category: "dairyproduct",
 		organicProduct:false,
 		price: 4.00
 
 	},
 	{
-		name: "fried chiken",
+		name: "fried chicken",
 		vegetarian: false,
 		glutenFree: false,
+		category: "meat",
 		organicProduct:false,
 		price: 8.00
 
